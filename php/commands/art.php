@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Print the pantheon art
+ * Print artwork from Pantheon and others.
  *
  */
 class Art_Command extends Terminus_Command {
@@ -14,8 +14,35 @@ class Art_Command extends Terminus_Command {
   );
 
   /**
-   * View Pantheon artwork
+   * Print artwork from Pantheon and others.
    *
+   * ## OPTIONS
+   *
+   *     When no option is specified, a piece of artwork is randomly selected.
+   *
+   * [fist]
+   * : Print the Pantheon fist artwork.
+   *
+   * [unicorn]
+   * : Print some pretty unicorn artwork.
+   *
+   * [druplicon]
+   * : Print the druplicon artwork.
+   *
+   * [wordpress]
+   * : Print the Wordpress logo artwork.
+   *
+   * ## EXAMPLES
+   *
+   * terminus art
+   *
+   * terminus art fist
+   *
+   * terminus art unicorn
+   *
+   * terminus art druplicon
+   *
+   * terminus art wordpress
    */
   function __invoke( $args, $assoc_args ) {
     $artwork = array_shift($args) ?: array_rand($this->works); 
