@@ -8,6 +8,10 @@ use \Terminus\Helpers\Input;
 use \Guzzle\Http\Client;
 use \Terminus\Loggers\Regular as Logger;
 
+/**
+ * Display information about a user's organization(s).
+ *
+ */
 class Organizations_Command extends Terminus_Command {
 
   public function __construct() {
@@ -18,7 +22,7 @@ class Organizations_Command extends Terminus_Command {
    * API call to get a user's organizations.
    *
    * @subcommand list
-   *
+   * @alias all
    */
   public function all($args, $assoc_args) {
      $user = new User();
@@ -34,7 +38,7 @@ class Organizations_Command extends Terminus_Command {
   }
 
   /**
-   * List an organizations sites
+   * List, add, or remove an organization's site(s).
    *
    * ## OPTIONS
    *
@@ -47,8 +51,18 @@ class Organizations_Command extends Terminus_Command {
    * [--remove=<site>]
    * : Site to remove from organization
    *
-   * @subcommand sites
+   * ## EXAMPLES
    *
+   * # List all sites belonging to the "yourorg" organization.
+   * terminus organizations sites --org=yourorg
+   *
+   * # Add the "yoursite" site to an organization.
+   * terminus organizations sites --add=yoursite
+   *
+   * # Remove the "yoursite" site from an organization.
+   * terminus organizations sites --remove=yoursite
+   *
+   * @subcommand sites
    */
   public function sites($args, $assoc_args) {
     $orgs = array();

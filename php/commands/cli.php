@@ -1,11 +1,11 @@
 <?php
+use \Terminus\Dispatcher,
+  \Terminus\Utils;
+
 /**
  * Get information about Terminus itself.
  *
  */
-use \Terminus\Dispatcher,
-  \Terminus\Utils;
-
 class CLI_Command extends Terminus_Command {
 
   private function command_to_array( $command ) {

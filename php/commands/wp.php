@@ -22,7 +22,6 @@ class WPCLI_Command extends CommandWithSSH {
    *
    * [--env=<environment>]
    * : Your Pantheon environment. Default: dev
-   *
    */
   function __invoke( $args, $assoc_args ) {
     $site_name = $assoc_args['site'];

@@ -1,6 +1,6 @@
 <?php
 /**
- * actions on an individual site
+ * Perform actions on an individual site.
  *
  */
 
@@ -23,19 +23,19 @@ class Site_Command extends Terminus_Command {
   protected $_headers = false;
 
   /**
-  * Get or set site attributes
-  *
-  * ## OPTIONS
-  *
-  * [--site=<site>]
-  * : site to check attributes on
-  *
-  * [--env=<env>]
-  * : environment
-  *
-  * ## EXAMPLES
-  *
-  **/
+   * Get or set site attributes.
+   *
+   * ## OPTIONS
+   *
+   * [--site=<site>]
+   * : Site to get or set attributes on.
+   *
+   * [--env=<env>]
+   * : Environment to get or set attributes on.
+   *
+   * ## EXAMPLES
+   *
+   */
   public function attributes($args, $assoc_args) {
     $site = SiteFactory::instance(Input::site($assoc_args));
     $data = $site->attributes();
@@ -43,15 +43,15 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * Create a branch for developing
+   * Create a branch for developing.
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : site to create branch of
+   * : Site to create a development branch on.
    *
    * --branch=<branch>
-   * : name of new branch
+   * : Name of the new branch.
    *
    * ## EXAMPLES
    *
@@ -66,18 +66,18 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * Clear all site caches
+   * Clear all site caches.
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : site to use
+   * : Site to clear caches from.
    *
    * [--env=<env>]
-   * : Environment to clear
+   * : Environment to clear caches from.
    *
    * ## EXAMPLES
-   *  terminus site clear-caches --site=test
+   *  terminus site clear-caches --site=yoursite
    *
    * @subcommand clear-caches
    */
@@ -90,24 +90,24 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * Code related commands
+   * Execute code-related commands.
    *
    * ## OPTIONS
    *
    * <log|branches|branch-create|diffstat|commit>
-   * : options are log, branches, branch-create, diffstat, commit
+   * : Options are log, branches, branch-create, diffstat, commit.
    *
    * [--site=<site>]
-   * : name of the site
+   * : Site to perform code action on.
    *
    * [--env=<env>]
-   * : site environment
+   * : Environment to perform code action on.
    *
    * [--message=<message>]
-   * : message to use when committing on server changes
+   * : Message to use when committing on-server changes.
    *
    * [--branchname=<branchname>]
-   * : When using branch-create specify the branchname
+   * : When using branch-create, specify the name of the branch.
    */
   public function code($args, $assoc_args) {
       $subcommand = array_shift($args);
@@ -184,21 +184,21 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-  * Connection related commands
-  *
-  * ## OPTIONS
-  *
-  * [--site=<site>]
-  * : name of the site
-  *
-  * [--env=<env>]
-  * : site environment
-  *
-  * [--set=<value>]
-  * : set connection to sftp or git
-  *
-  * @subcommand connection-mode
-  */
+   * Execute connection related commands.
+   *
+   * ## OPTIONS
+   *
+   * [--site=<site>]
+   * : Site to perform commands on.
+   *
+   * [--env=<env>]
+   * : Environment to perform commands on.
+   *
+   * [--set=<value>]
+   * : Set connection mode to sftp or git.
+   *
+   * @subcommand connection-mode
+   */
   public function connection_mode($args, $assoc_args) {
     $site = SiteFactory::instance(Input::site($assoc_args));
     $action = 'show';
@@ -230,12 +230,12 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * Open the Pantheon site dashboard in a browser
+   * Open the Pantheon site dashboard in a browser.
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : site dashboard to open
+   * : Site dashboard to open.
    *
    * @subcommand dashboard
   */
@@ -247,18 +247,19 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * Retrieve information about the site
+   * Retrieve information about the site.
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : name of the site to work with
+   * : Name of the site to retrieve information from.
    *
    * [--field=<field>]
-   * : field to return
+   * : Field to return.
    *
    * ## EXAMPLES
    *
+   * @subcommand info
    */
   public function info($args, $assoc_args) {
     $site = SiteFactory::instance( Input::site( $assoc_args ) );
@@ -274,22 +275,23 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * List site organizations
+   * List site organizations.
    *
    * ## OPTIONS
    *
    * <list|add|remove>
-   * : subfunction to run
+   * : Subfunction to run.
    *
    * [--site=<site>]
-   * : Site's name
+   * : Site name.
    *
    * [--org=<org>]
-   * : Organization name
+   * : Organization name.
    *
    * [--role=<role>]
-   * : Max role for organization on this site ... default "team_member"
+   * : Max role for organization on this site. Default: team_member
    *
+   * @subcommand organizations
    */
   public function organizations($args, $assoc_args) {
     $action = array_shift($args);
@@ -334,30 +336,29 @@ class Site_Command extends Terminus_Command {
   }
 
  /**
-  * Get, load, create, or list backup information
+  * Get, load, create, or list backup information.
   *
   * ## OPTIONS
   *
   * <get|load|create|list>
-  * : function to run - get, load, create, or list
+  * : Function to run - get, load, create, list.
   *
   * [--site=<site>]
-  * : Site to load
+  * : Site to load backup informationfrom.
   *
   * [--env=<env>]
-  * : Environment to load
+  * : Environment to load backup information from.
   *
   * [--element=<code|files|db>]
-  * : Element to download
+  * : Element to download.
   *
   * [--to-directory=<directory>]
-  * : Download the file if set
+  * : Download the files to this directory, if `--element=files` is set.
   *
   * [--latest]
-  * : if set no the latest backup will be selected automatically
+  * : If set, the latest backup will be selected automatically.
   *
   * @subcommand backup
-  *
   */
    public function backup($args, $assoc_args) {
      $action = array_shift($args);
@@ -511,24 +512,24 @@ class Site_Command extends Terminus_Command {
    }
 
   /**
-   * Clone dev to test or test to live
+   * Clone dev to test or test to live.
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : Site to use
+   * : Site to clone environments in.
    *
    * [--from-env]
-   * : Environment you want to clone from
+   * : Environment you want to clone from.
    *
    * [--to-env]
-   * : Environment you want to clone to
+   * : Environment you want to clone to.
    *
    * [--db]
-   * : Clone the database? (bool) default no
+   * : Clone the database? (bool) Default: no
    *
    * [--files]
-   * : Clone the files? (bool) default no
+   * : Clone the files? (bool) Default: no
    *
    * @subcommand clone-env
    */
@@ -593,18 +594,18 @@ class Site_Command extends Terminus_Command {
    }
 
   /**
-   * Create a MultiDev environment
+   * Create a MultiDev environment.
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : Site to use
+   * : Site to create the environment in.
    *
    * [--env=<env>]
-   * : Name of environment to create
+   * : Name of the environment to create.
    *
    * [--from-env=<env>]
-   * : Environment clone content from, default = dev
+   * : Environment clone content from. Default: dev
    *
    * @subcommand create-env
    */
@@ -625,15 +626,15 @@ class Site_Command extends Terminus_Command {
    }
 
    /**
-   * Delete a MultiDev environment
+   * Delete a MultiDev environment.
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : Site to use
+   * : Site to delete the environment from.
    *
    * [--env=<env>]
-   * : name of environment to delete
+   * : Name of the environment to delete.
    *
    * @subcommand delete-env
    */
@@ -651,28 +652,28 @@ class Site_Command extends Terminus_Command {
    }
 
    /**
-    * Deploy dev environment to test or live
+    * Deploy code from dev environment to test or live.
     *
     * ## OPTIONS
     *
     * [--site=<site>]
-    * : Site to deploy from
+    * : Site to deploy code in.
     *
     * [--env=<env>]
-    * : Environment to deploy to
+    * : Environment to deploy code to.
     *
     * [--from=<env>]
-    * : Environment to deploy from
+    * : Environment to deploy code from.
     *
     * [--cc]
-    * : Clear cache after deploy?
+    * : Clear cache after deploy? (bool) Default: no
     *
     * [--updatedb]
-    * : (Drupal only) run update.php after deploy?
+    * : Run update.php after deploy (Drupal only)? (bool) Default: no
     *
     *
     * [--note=<note>]
-    * : deploy log message
+    * : Message for the deploy log.
     *
     */
    public function deploy($args, $assoc_args) {
@@ -714,8 +715,9 @@ class Site_Command extends Terminus_Command {
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : Name of site to check
+   * : Name of site to list environments from.
    *
+   * @subcommand environments
    */
   function environments($args, $assoc_args) {
     $site = SiteFactory::instance( Input::site( $assoc_args ) );
@@ -741,21 +743,21 @@ class Site_Command extends Terminus_Command {
    }
 
   /**
-   * Hostname operations
+   * Perform hostname operations.
    *
    * ## OPTIONS
    *
    * <list|add|remove>
-   * : OPTIONS are list, add, delete
+   * : Function to run - list, add, remove.
    *
    * [--site=<site>]
-   * : Site to use
+   * : Site to use.
    *
    * --env=<env>
-   * : environment to use
+   * : Environment to use.
    *
    * [--hostname=<hostname>]
-   * : hostname to add
+   * : Hostname to add or remove. Required with <add> or <remove> functions.
    *
    */
    public function hostnames($args, $assoc_args) {
@@ -796,24 +798,24 @@ class Site_Command extends Terminus_Command {
    }
 
   /**
-   * Lock an environment to prevent changes
+   * Lock an environment to prevent changes.
    *
    * ## OPTIONS
    *
    * <info|add|remove>
-   * : action to execute ( i.e. info, add, remove )
+   * : Function to run - info, add, remove
    *
    * [--site=<site>]
-   * : site name
+   * : Site to use.
    *
    * [--env=<env>]
-   * : site environment
+   * : Environment to lock or unlock.
    *
    * [--username=<username>]
-   * : your username
+   * : Username for the lock.
    *
    * [--password=<password>]
-   * : your password
+   * : Password for the lock.
    *
   **/
   function lock($args, $assoc_args) {
@@ -860,16 +862,16 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * Import a zip archive == see this article for more info:
-   * http://helpdesk.getpantheon.com/customer/portal/articles/1458058-importing-a-wordpress-site
+   * Import a zip archive. See this article for more information:
+   * http://pantheon.io/docs/articles/wordpress/importing-a-wordpress-site/
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : Site to use
+   * : Site to import the archive into.
    *
    * --url=<url>
-   * : Archive to import
+   * : Publicly-accessible URL of the archive to import.
    *
    * @subcommand import
    */
@@ -888,15 +890,15 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * Change the site payment instrument
+   * Change the site payment instrument.
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : Site to use
+   * : Site to change payment settings for.
    *
    * [--change-to-org=<org>]
-   * : Change the instrument to an Org by setting the id. ( must be admin )
+   * : Change the instrument to an organization by setting the UUID. You must be an organization admin.
    *
    * ## EXAMPLES
    *
@@ -925,13 +927,15 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * List a site's job history
+   * List a site's job history.
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : Site to deploy from
-  **/
+   * : Site to get job information from.
+   *
+   * @subcommand jobs
+   */
   public function jobs($args, $assoc_args) {
     $site = SiteFactory::instance(Input::site($assoc_args));
     $jobs = $site->jobs();
@@ -954,15 +958,16 @@ class Site_Command extends Terminus_Command {
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : Site to deploy from
+   * : Site to mount.
    *
    * --destination=<path>
-   * : local directory to mount
+   * : Local directory to use as a mountpoint.
    *
    * [--env=<env>]
-   * : Environment (dev,test)
+   * : Environment to mount.
    *
-  **/
+   * @subcommand mount
+   */
   public function mount($args, $assoc_args) {
     exec("which sshfs", $stdout, $exit);
     if ($exit !== 0) {
@@ -981,7 +986,7 @@ class Site_Command extends Terminus_Command {
      $darwin = True;
     }
 
-    // @todo I'd prefer this was done with sprintf for a little validation
+    // @TODO I'd prefer this was done with sprintf for a little validation
     $user = $env.'.'.$site->getId();
     $host = 'appserver.' . $env . '.' . $site->getId() . '.drush.in';
     $darwin_args = $darwin ? '-o defer_permissions ' : '';
@@ -995,15 +1000,15 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-  * Get New Relic Info for site
-  *
-  * ## OPTIONS
-  *
-  * [--site=<site>]
-  * : site for which to retreive notifications
-  *
-  * @subcommand new-relic
-  */
+   * Get New Relic information.
+   *
+   * ## OPTIONS
+   *
+   * [--site=<site>]
+   * : Site for which to retreive information.
+   *
+   * @subcommand new-relic
+   */
   public function new_relic($args, $assoc_args) {
     $site = SiteFactory::instance(Input::site($assoc_args));
     $data = $site->newRelic();
@@ -1015,14 +1020,15 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-  * Open the Pantheon site dashboard a browser
-  *
-  * ## OPTIONS
-  *
-  * [--site=<site>]
-  * : site for which to retreive notifications
-  *
-  */
+   * Get notifications for the site.
+   *
+   * ## OPTIONS
+   *
+   * [--site=<site>]
+   * : Site for which to retreive notifications.
+   *
+   * @subcommand notifications
+   */
   public function notifications($args, $assoc_args) {
     $site = SiteFactory::instance(Input::site($assoc_args));
     $notifications = $site->notifications();
@@ -1041,18 +1047,18 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-  * Get or set owner
-  *
-  * ## OPTIONS
-  *
-  * [--site=<site>]
-  * : Site to check
-  *
-  * [--set=<value>]
-  * : new owner to set
-  *
-  * @subcommand owner
-  */
+   * Get or set owner on a site.
+   *
+   * ## OPTIONS
+   *
+   * [--site=<site>]
+   * : Site to check.
+   *
+   * [--set=<value>]
+   * : New owner to set.
+   *
+   * @subcommand owner
+   */
   public function owner($args, $assoc_args) {
     $site = SiteFactory::instance(Input::site($assoc_args));
     $data = $site->owner();
@@ -1060,23 +1066,24 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * Interacts with redis
+   * Interact with redis.
    *
    * ## OPTIONS
    *
    * <clear>
-   * : clear - Clear redis cache on remote server
+   * : Clear redis cache on remote server.
    *
    * [--site=<site>]
-   * : site name
+   * : Site to clear caches for.
    *
    * [--env=<env>]
-   * : environment
+   * : Environment to clear caches for.
    *
    * ## Examples
    *
-   *    terminus site redis clear --site=mikes-wp-test --env=live
+   * terminus site redis clear --site=mikes-wp-test --env=live
    *
+   * @subcommand redis
    */
   public function redis($args, $assoc_args) {
     $action = array_shift($args);
@@ -1109,15 +1116,15 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * Get or set service level
+   * Get or set the service level for a site.
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : Site to check
+   * : Site to get or set service level information for.
    *
    * [--set=<value>]
-   * : new service level to set
+   * : New service level to set.
    *
    * @subcommand service-level
    */
@@ -1134,21 +1141,21 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-  * Get or set team members
-  *
-  * ## OPTIONS
-  *
-  * <list|add-member|remove-member>
-  * : i.e. add or remove
-  *
-  * [--site=<site>]
-  * : Site to check
-  *
-  * [--member=<email>]
-  * : Email of the member to add. Member will receive an invite
-  *
-  * @subcommand team
-  */
+   * Get or set team members
+   *
+   * ## OPTIONS
+   *
+   * <list|add-member|remove-member>
+   * : Function to run - list, add-member, remove-member.
+   *
+   * [--site=<site>]
+   * : Site to get or set team member information for.
+   *
+   * [--member=<email>]
+   * : Email of the member to add. Member will receive an invitation.
+   *
+   * @subcommand team
+   */
   public function team($args, $assoc_args) {
     $action = array_shift($args) ?: 'list';
     $site = SiteFactory::instance(Input::site($assoc_args));
@@ -1182,12 +1189,12 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * Show upstream updates
+   * Show available upstream updates for a site.
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : Site to check
+   * : Site to check upstream update information for.
    *
    * @subcommand upstream-info
    */
@@ -1198,7 +1205,7 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * Show or apply upstream updates
+   * Apply upstream updates for a site.
    *
    * ## OPTIONS
    *
@@ -1208,8 +1215,8 @@ class Site_Command extends Terminus_Command {
    * [--update=<env>]
    * : Do update on dev env
    *
-   * @alias upstream-updates
-  **/
+   * @subcommand upstream-updates
+   */
    public function upstream_updates($args, $assoc_args) {
      $site = SiteFactory::instance(Input::site($assoc_args));
      $upstream = $site->getUpstreamUpdates();
@@ -1256,18 +1263,20 @@ class Site_Command extends Terminus_Command {
    }
 
   /**
-   * Pings a site to ensure it responds
+   * Pings a site to ensure it responds.
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : site to ping
+   * : Site to ping.
    *
    * [--env=<env>]
-   * : environment to ping
+   * : Environment to ping.
    *
    * ## Examples
-   *  terminus site wake --site='testsite' --env=dev
+   *  terminus site wake --site=yoursite --env=dev
+   *
+   * @subcommand ping
   */
   public function wake($args, $assoc_args) {
     $site = SiteFactory::instance(Input::site($assoc_args));
@@ -1288,15 +1297,17 @@ class Site_Command extends Terminus_Command {
   }
 
   /**
-   * Complete wipe and reset a site
+   * Completely wipe and reset a site
    *
    * ## OPTIONS
    *
    * [--site=<site>]
-   * : Site to use
+   * : Site to wipe.
    *
    * [--env=<env>]
-   * : Specify environment, default = dev
+   * : Specify environment. Default: dev
+   *
+   * @subcommand wipe
    */
    public function wipe($args, $assoc_args) {
      try {

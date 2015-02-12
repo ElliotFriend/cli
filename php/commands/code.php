@@ -1,24 +1,25 @@
 <?php
-
 use \Terminus\Dispatcher,
   \Terminus\Utils,
   \Terminus\CommandWithSSH;
 
-
 class Code_Command extends CommandWithSSH {
 
-
   /**
-   * Commands specific to an environment
+   * Perform commands specific to an environment.
    *
-   * <commands>...
+   * ## OPTIONS
+   *
    * [--site=<value>]
-   * : specify the site on which the command should be performed
+   * : Specify the site on which the command should be performed.
+   *
    * [--env=<value>]
-   * : Specificy the environment of a site previously set with --site=
+   * : Specify the environment of a site previously set with '--site='.
    *
    * [--<flag>=<value>]
    * : Additional argument flag(s) to pass in to the command.
+   *
+   * @synopsis <command>
    */
   function __invoke(array $args, array $assoc_args ) {
     if (empty($args) ) {
@@ -32,7 +33,9 @@ class Code_Command extends CommandWithSSH {
 
 
   /**
-   * API Call to Get Code Commit Information
+   * API call to get code commit information.
+   *
+   * @subcommand log
    */
   function log(array $args, array $assoc_args ) {
     //TODO: format output
@@ -40,7 +43,9 @@ class Code_Command extends CommandWithSSH {
   }
 
   /**
-   * API Call to Get Core Status
+   * API call to get core status
+   *
+   * @subcommand upstream-info
    */
   function upstream_info(array $args, array $assoc_args ) {
     //TODO: format output
@@ -48,7 +53,9 @@ class Code_Command extends CommandWithSSH {
   }
 
   /**
-   * API Call to get branches.
+   * API call to get branches.
+   *
+   * @subcommand tips
    */
   function tips(array $args, array $assoc_args ) {
     //TODO: format output
@@ -56,7 +63,9 @@ class Code_Command extends CommandWithSSH {
   }
 
   /**
-   * API Call to create branch.
+   * API call to create branch.
+   *
+   * @subcommand branch-create
    */
   function branchcreate(array $args, array $assoc_args ) {
     $branch_name = array_shift($args);
@@ -69,7 +78,9 @@ class Code_Command extends CommandWithSSH {
   }
 
   /**
-   * API Call to delete branch.
+   * API call to delete branch.
+   *
+   * @subcommand delete-branch
    */
   function branchdelete(array $args, array $assoc_args) {
     $branch_name = array_shift($args);
@@ -81,11 +92,17 @@ class Code_Command extends CommandWithSSH {
   }
 
   /**
-   * API Call to Update Core Status
+   * API call to update core status.
+   *
+   * ## OPTIONS
+   *
    * [--updatedb=<true|false>]
    * : specify the site on which the command should be performed
+   *
    * [--xoption=<theirs|mine>]
    * : specifies the merge option
+   *
+   * @subcommand upstream-update
    */
   function upstreamupdate(array $args, array $assoc_args) {
 

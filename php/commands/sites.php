@@ -1,6 +1,6 @@
 <?php
 /**
- * Actions on multiple sites
+ * Perform actions on multiple sites
  *
  */
 use Terminus\Utils;
@@ -28,8 +28,6 @@ class Sites_Command extends Terminus_Command {
   /**
    * Show sites
    *
-   * ## OPTIONS
-   *
    * @subcommand list
    * @alias show
    */
@@ -52,24 +50,26 @@ class Sites_Command extends Terminus_Command {
   }
 
   /**
-   * Create a new site
+   * Create a new site.
    *
    * ## OPTIONS
    *
    * [--product=<productid>]
-   * : Specify the product to create
+   * : Specify the product to create.
    *
    * [--name=<name>]
-   * : Name of the site to create (machine-readable)
+   * : Name of the site to create (machine-readable).
    *
    * [--label=<label>]
-   * : Label for the site
+   * : Label for the site.
    *
    * [--org=<org>]
-   * : UUID of organization to add this site to
+   * : UUID of organization to add this site to.
    *
    * [--import=<url>]
-   * : A url to import a valid archive from
+   * : A publicly-accessible URL to import a valid archive from.
+   *
+   * @subcommand create
    */
   public function create($args, $assoc_args) {
     $sites = SiteFactory::instance();
@@ -104,25 +104,25 @@ class Sites_Command extends Terminus_Command {
   }
 
   /**
-  * Import a new site
-  * @package 2.0
-  *
-  * ## OPTIONS
-  *
-  * [--url=<url>]
-  * : Url of archive to import
-  *
-  * [--name=<name>]
-  * : Name of the site to create (machine-readable)
-  *
-  * [--label=<label>]
-  * : Label for the site
-  *
-  * [--org=<org>]
-  * : UUID of organization to add this site to
-  *
-  * @subcommand create-from-import
-  */
+   * Import a new site from an existing archive.
+   *
+   * ## OPTIONS
+   *
+   * [--url=<url>]
+   * : Publicly-accessible URL of archive to import.
+   *
+   * [--name=<name>]
+   * : Name of the site to create (machine-readable).
+   *
+   * [--label=<label>]
+   * : Label for the site.
+   *
+   * [--org=<org>]
+   * : UUID of organization to add this site to.
+   *
+   * @subcommand create-from-import
+   * @package 2.0
+   */
   public function import($args, $assoc_args) {
     $url = Input::string($assoc_args, 'url', "Url of archive to import");
     $label = Input::string($assoc_args, 'label', "Human readable label for the site");
@@ -142,11 +142,12 @@ class Sites_Command extends Terminus_Command {
   }
 
   /**
-   * Delete a site from pantheon
+   * Delete a site from Pantheon.
    *
    * ## OPTIONS
+   *
    * --site=<site>
-   * : Id of the site you want to delete
+   * : Name of the site you want to delete.
    *
    * [--all]
    * : Just kidding ... we won't let you do that.
@@ -154,6 +155,7 @@ class Sites_Command extends Terminus_Command {
    * [--force]
    * : to skip the confirmations
    *
+   * @subcommand delete
    */
   function delete($args, $assoc_args) {
       $site_to_delete = SiteFactory::instance(@$assoc_args['site']);
@@ -179,16 +181,17 @@ class Sites_Command extends Terminus_Command {
   }
 
   /**
-   * Print and save drush aliases
+   * Print and save drush aliases.
    *
    * ## OPTIONS
    *
    * [--print]
-   * : print aliases to screen
+   * : Print the aliases to screen.
    *
    * [--location=<location>]
-   * : specify the location of the alias file, default it ~/.drush/pantheon.drushrc.php
+   * : Specify the location of the alias file. Default: ~/.drush/pantheon.drushrc.php
    *
+   * @subcommand aliases
    */
   public function aliases($args, $assoc_args) {
     $user = new User();

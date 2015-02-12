@@ -1,14 +1,14 @@
 <?php
-/**
- * Authenticate to Pantheon and store a local secret token.
- *
- */
  use Terminus\Request as Request;
  use Terminus\Utils;
  use Symfony\Component\DomCrawler\Crawler;
  use Guzzle\Parser\Cookie\CookieParser;
  use Terminus\Session;
 
+/**
+ * Authenticate to Pantheon and store a local secret token.
+ *
+ */
 class Auth_Command extends Terminus_Command {
   private $sessionid;
   private $session_cookie_name='X-Pantheon-Session';
@@ -17,7 +17,7 @@ class Auth_Command extends Terminus_Command {
 
 
   /**
-   * Log in as a user
+   * Log in as a user.
    *
    * ## OPTIONS
    *
@@ -32,10 +32,13 @@ class Auth_Command extends Terminus_Command {
    *
    * ## EXAMPLES
    *
+   * # Login interactively. Terminus will ask you for an email and password.
    * terminus auth login
    *
+   * # Login as user@example.com
    * terminus auth login user@example.com
    *
+   * # Login as user@example.com using the provided password.
    * terminus auth login user@example.com --password=yourpassword
    *
    * @subcommand login

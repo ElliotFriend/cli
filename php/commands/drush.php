@@ -1,15 +1,15 @@
 <?php
-
 use \Terminus\Dispatcher,
   \Terminus\Utils,
   \Terminus\CommandWithSSH,
   \Terminus\SiteFactory;
 
-
 class Drush_Command extends CommandWithSSH {
 
   /**
-   * Invoke `drush` commands on a Pantheon development site
+   * Invoke `drush` commands on a Pantheon development site.
+   *
+   * ## OPTIONS
    *
    * <commands>...
    * : The Drush commands you intend to run.
@@ -23,6 +23,10 @@ class Drush_Command extends CommandWithSSH {
    * [--env=<environment>]
    * : Your Pantheon environment. Default: dev
    *
+   * ## EXAMPLES
+   *
+   * # Use drush to download the views module
+   * terminus drush dl views --site=yoursite --env=dev
    */
   function __invoke( $args, $assoc_args ) {
     $site_name = $assoc_args['site'];

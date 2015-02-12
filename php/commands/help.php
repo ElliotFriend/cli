@@ -8,17 +8,15 @@ class Help_Command extends Terminus_Command {
   /**
    * Get help on a certain command.
    *
-   * <command>
-   *
    * ## EXAMPLES
    *
-   *     # get help for `core` command
-   *     terminus help core
+   * # Get help for the `core` command.
+   * terminus help core
    *
-   *     # get help for `core download` subcommand
-   *     terminus help core download
+   * # Get help for the `core download` subcommand.
+   * terminus help core download
    *
-   * @synopsis [<command>...]
+   * @synopsis [<commands>...]
    */
   function __invoke( $args, $assoc_args ) {
     $command = self::find_subcommand( $args );
