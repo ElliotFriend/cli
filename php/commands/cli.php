@@ -1,12 +1,11 @@
 <?php
-
-use \Terminus\Dispatcher,
-  \Terminus\Utils;
-
 /**
  * Get information about Terminus itself.
  *
  */
+use \Terminus\Dispatcher,
+  \Terminus\Utils;
+
 class CLI_Command extends Terminus_Command {
 
   private function command_to_array( $command ) {
@@ -29,6 +28,8 @@ class CLI_Command extends Terminus_Command {
 
   /**
    * Print Terminus version.
+   *
+   * @subcommand version
    */
   function version() {
     Terminus::line( 'Terminus ' . TERMINUS_VERSION );
@@ -41,6 +42,14 @@ class CLI_Command extends Terminus_Command {
    *
    * [--format=<format>]
    * : Accepted values: json
+   *
+   * ## EXAMPLES
+   *
+   * terminus cli info
+   *
+   * terminus cli info --format=json
+   *
+   * @subcommand info
    */
   function info( $_, $assoc_args ) {
     $php_bin = defined( 'PHP_BINARY' ) ? PHP_BINARY : getenv( 'TERMINUS_PHP_USED' );
@@ -96,6 +105,8 @@ class CLI_Command extends Terminus_Command {
    *
    * --point=<point>
    * : The index to the current cursor position relative to the beginning of the command
+   *
+   * @subcommand completions
    */
   function completions( $_, $assoc_args ) {
     $line = substr( $assoc_args['line'], 0, $assoc_args['point'] );
@@ -104,7 +115,8 @@ class CLI_Command extends Terminus_Command {
   }
 
   /**
-  * Clear session data
+  * Clear session data.
+  *
   * @subcommand session-clear
   */
   function session_clear() {
@@ -112,6 +124,8 @@ class CLI_Command extends Terminus_Command {
   }
 
   /**
+  * Dump session data, as JSON.
+  * 
   * @subcommand session-dump
   */
   public function session_dump() {
@@ -120,6 +134,8 @@ class CLI_Command extends Terminus_Command {
   }
 
   /**
+  * Flush session data.
+  *
   * @subcommand cache-clear
   */
   public function cache_clear($cache = null) {
