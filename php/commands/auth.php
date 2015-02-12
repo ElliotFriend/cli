@@ -19,14 +19,26 @@ class Auth_Command extends Terminus_Command {
   /**
    * Log in as a user
    *
-   *  ## OPTIONS
+   * ## OPTIONS
+   *
    * [<email>]
-   * : Email address to log in as.
+   * : Email address to use for login.
    *
    * [--password=<value>]
-   * : Log in non-interactively with this password. Useful for automation.
+   * : Log in non-interactively using this password. Useful for automation.
+   *
    * [--debug]
-   * : dump call information when logging in.
+   * : Dump call information when logging in.
+   *
+   * ## EXAMPLES
+   *
+   * terminus auth login
+   *
+   * terminus auth login user@example.com
+   *
+   * terminus auth login user@example.com --password=yourpassword
+   *
+   * @subcommand login
    */
   public function login( $args, $assoc_args ) {
     if ( empty( $args ) ) {
@@ -66,6 +78,8 @@ class Auth_Command extends Terminus_Command {
 
   /**
    * Log yourself out and remove the secret session key.
+   *
+   * @subcommand logout
    */
   public function logout() {
     Terminus::line( "Logging out of Pantheon." );
@@ -74,6 +88,8 @@ class Auth_Command extends Terminus_Command {
 
   /**
    * Find out what user you are logged in as.
+   *
+   * @subcommand whoami
    */
   public function whoami() {
     if (Session::getValue('email')) {
