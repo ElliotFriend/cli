@@ -14,7 +14,7 @@ class Art_Command extends Terminus_Command {
   );
 
   /**
-   * Print artwork from Pantheon and others.
+   * Print artwork from Pantheon and others
    *
    * ## OPTIONS
    *
